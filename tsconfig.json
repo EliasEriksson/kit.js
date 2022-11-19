@@ -1,0 +1,16 @@
+{
+	"extends": "./tsconfig.test.json",
+	"compilerOptions": {
+		"declaration": true,
+		"sourceMap": true,
+		"sourceRoot": "../",
+		"outDir": "dist",
+		"baseUrl": ".",
+		"allowSyntheticDefaultImports": true,
+		"types": [],
+		"noImplicitAny": true
+	},
+	"files": [
+		"index.ts",
+	]
+}
