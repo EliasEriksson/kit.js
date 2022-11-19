@@ -1,14 +1,14 @@
 {
-	"name": "@utily/library-template",
-	"version": "0.0.15",
-	"description": "Template library for Typescript.",
-	"author": "Utily Contributors",
+	"name": "structures",
+	"version": "0.0.1",
+	"description": "Utility functions for built in javascript structures.",
+	"author": "Elias Eriksson",
 	"license": "MIT",
-	"repository": "https://github.com/utily/library-template",
+	"repository": "https://github.com/eliaseriksson/structures.js",
 	"bugs": {
-		"url": "https://github.com/utily/library-template/issues"
+		"url": "https://github.com/eliaseriksson/structures.js/issues"
 	},
-	"homepage": "https://github.com/utily",
+	"homepage": "https://github.com/eliaseriksson/structures.js",
 	"private": false,
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
