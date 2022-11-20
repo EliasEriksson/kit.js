@@ -87,4 +87,12 @@ describe("Iterable", () => {
 		const [a, b] = structures.Iterable.range(0, 4).fork()
 		expect(a.array()).toEqual(b.array())
 	})
+	it("forEach", () => {
+		let result: number[] = []
+		structures.Iterable.forEach([1, 2, 3], v => result.push(v))
+		expect(result).toEqual([1, 2, 3])
+		result = []
+		structures.Iterable.range(1, 4).forEach(v => result.push(v))
+		expect(result).toEqual([1, 2, 3])
+	})
 })
