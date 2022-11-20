@@ -1,1 +1,1 @@
-export * as types from "./exports"
+export * as structures from "./exports"
