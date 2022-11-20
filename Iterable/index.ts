@@ -37,7 +37,7 @@ export namespace Iterable_ {
 				return true
 		return false
 	}
-	export function* concat<I>(a: Iterable<I>, b: Iterable<I>): Iterable<I> {
+	export function* concatenate<I>(a: Iterable<I>, b: Iterable<I>): Iterable<I> {
 		for (const value of a)
 			yield value
 		for (const value of b)
