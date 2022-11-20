@@ -3,7 +3,7 @@
 		"target": "es2021",
 		"module": "es2020",
 		"lib": [
-			"es2021",
+			"es2022",
 			"dom"
 		],
 		"allowJs": true,
