@@ -10,6 +10,9 @@
 		"types": [],
 		"noImplicitAny": true
 	},
+	"exclude": [
+		"polyfills.ts"
+	],
 	"files": [
 		"index.ts",
 	]

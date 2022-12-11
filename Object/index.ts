@@ -1,13 +1,16 @@
+import { Iterable_ } from "../Iterable"
 import { Json as json } from "./Json"
-
 export namespace Object_ {
-	export function nest<T extends Record<string, unknown>>(target: T, [key, ...tail]: string[], value: unknown): T {
-		return !key
+	export function merge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
+		return {}
+	}
+	function nestAssign<T extends Record<string, unknown>>(target: T, [key, ...tail]: string[], value: unknown): T {
+		return key == undefined
 			? target
 			: !tail.length
 			? Object.assign(target, { [key]: value })
 			: Object.assign(target, {
-					[key]: nest(
+					[key]: nestAssign(
 						(current =>
 							typeof current != "object" || !current || Array.isArray(current)
 								? {}
@@ -17,12 +20,52 @@ export namespace Object_ {
 					),
 			  })
 	}
-	export function keys<T extends Record<string, unknown>>(target: T): (keyof T)[] {
-		return Object.keys(target) as (keyof T)[]
+	export function nest(source: Record<string, unknown>, separator = "."): Record<string, unknown> {
+		return Object.entries(source).reduce((target, [key, value]) => nestAssign(target, key.split(separator), value), {})
 	}
-	export function entries<T extends Record<string, unknown>>(target: T): [keyof T, T[keyof T]][] {
-		return Object.entries(target) as [keyof T, T[keyof T]][]
+	function flatAssign(prefix: string, source: Record<string, unknown>, separator = "."): Record<string, unknown> {
+		return Object.entries(source).reduce(
+			(target, [key, value]) =>
+				typeof value == "object" && value && value.constructor.name == "Object"
+					? flatAssign(prefix + separator + key, value as Record<string, unknown>)
+					: Object.assign(target, { [prefix + separator + key]: value }),
+			{}
+		)
+	}
+	export function flat(source: Record<string, unknown>, separator = "."): Record<string, unknown> {
+		return Object.entries(source).reduce((target, [key, value]) => {
+			return typeof value == "object" && value && value.constructor.name == "Object"
+				? flatAssign(key, value as Record<string, unknown>, separator)
+				: Object.assign(target, { [key]: value })
+		}, {})
+	}
+	export function formData(source: Record<string, unknown>): FormData {
+		const [form, data] = Object.entries(flat(source)).reduce<[FormData, Record<string, unknown>]>(
+			([form, data], [key, value]) => (
+				value instanceof Blob ? form.append(`file.${key}`, value) : (data[key] = value), [form, data]
+			),
+			[new FormData(), {}]
+		)
+		form.append("json", JSON.stringify(data))
+		return form
+	}
+	export function fromFormData(form: FormData): Record<string, unknown> {
+		return Iterable_.reduce(
+			form.entries(),
+			(target, [key, value]) => (
+				console.log(target),
+				key.startsWith("file.")
+					? Object.assign(target, nest({ [key.substring(5)]: value }))
+					: key == "json" && typeof value == "string"
+					? Object.assign(target, nest(JSON.parse(value as string)))
+					: target
+			),
+			{}
+		)
 	}
 	export type Json = json
 	export const Json = json
+}
+export function f(v: unknown) {
+	return typeof v == "object" && v && "foo" in v && v
 }
