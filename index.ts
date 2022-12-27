@@ -1,1 +1,1 @@
-export * as structures from "./exports"
+export * as kit from "./exports"
