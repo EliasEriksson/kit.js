@@ -1,1 +1,1 @@
-export * as kit from "./exports"
+export * as kit from "./exports.js"

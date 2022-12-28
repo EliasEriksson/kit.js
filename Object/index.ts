@@ -1,5 +1,5 @@
 import { Iterable_ } from "../Iterable"
-import { Json as json } from "./Json"
+
 export namespace Object_ {
 	export function merge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
 		return {}
@@ -63,8 +63,6 @@ export namespace Object_ {
 			{}
 		)
 	}
-	export type Json = json
-	export const Json = json
 }
 export function f(v: unknown) {
 	return typeof v == "object" && v && "foo" in v && v
