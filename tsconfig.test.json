@@ -4,7 +4,8 @@
 		"module": "es2020",
 		"lib": [
 			"es2022",
-			"dom"
+			"dom",
+			"dom.iterable"
 		],
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
