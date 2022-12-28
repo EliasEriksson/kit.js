@@ -8,9 +8,7 @@
 		"baseUrl": ".",
 		"allowSyntheticDefaultImports": true,
 		"types": [],
-		"noImplicitAny": true,
-		"module": "amd",
-		"outFile": "dist/index.js"
+		"noImplicitAny": true
 	},
 	"files": [
 		"index.ts",
