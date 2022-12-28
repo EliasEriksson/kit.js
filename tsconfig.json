@@ -8,11 +8,10 @@
 		"baseUrl": ".",
 		"allowSyntheticDefaultImports": true,
 		"types": [],
-		"noImplicitAny": true
+		"noImplicitAny": true,
+		"module": "amd",
+		"outFile": "dist/index.js"
 	},
-	"exclude": [
-		"polyfills.ts"
-	],
 	"files": [
 		"index.ts",
 	]
