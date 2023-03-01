@@ -14,7 +14,7 @@ export namespace Iterable_ {
 			}
 			return new Iterable(generator(this, mapping))
 		}
-		reduce<O>(reducer: (aggregate: O, value: I) => O, initial: O): O {
+		reduce<O>(reducer: (aggregate: O, value: I, index: number) => O, initial: O): O {
 			return Iterable_.reduce(this, reducer, initial)
 		}
 		filter(filter: (value: I) => boolean): Iterable<I> {
@@ -113,12 +113,13 @@ export namespace Iterable_ {
 	}
 	export function reduce<I, O>(
 		iterable: globalThis.Iterable<I>,
-		reducer: (aggregate: O, value: I) => O,
+		reducer: (aggregate: O, value: I, index: number) => O,
 		initial: O
 	): O {
+		let count = 0
 		let aggregate = initial
 		for (const value of iterable)
-			aggregate = reducer(aggregate, value)
+			aggregate = reducer(aggregate, value, count++)
 		return aggregate
 	}
 	export function filter<I>(iterable: globalThis.Iterable<I>, filter: (value: I) => boolean): Iterable<I> {
